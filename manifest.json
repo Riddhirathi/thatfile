@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "ThatFile",
+  "version": "0.1.0",
+  "description": "Find your Google Drive files by what is inside them. A small AI model runs in your browser, so there is no API cost.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApnolec7DwBrIadN/ol2iK31NwkL04AWfXg7o/0yhD+HlcI23xufVfsonepT7mTViQQCCtUv1cTW4x9Sibg/h0ovjg3vwhTYiwFtIaXiPzTKlCO5FsStZSPNIT8gFFlB1jSqGE0RE3K4YmjH+JhjplRs1yfozNajKrhXsPvj7MGAsNU8dqpmkNKonKFlPEAr3bRpmTmKOoLlZN7NoUp5TDs2iEsvAN75qFoHPos4de0GpGZoS4ThGiakJpDIj+WH+aPShcLAvonlVmtVwh4XGsRkxivnk36cuOsxwx9BVrvyDt4Rwt2CvsRHvjjhTP6pb2ZkvHt9WvQzgY8WpK30xPwIDAQAB",
+  "action": { "default_title": "That File (Ctrl+Shift+K)" },
+  "side_panel": { "default_path": "panel.html" },
+  "background": { "service_worker": "background.js" },
+  "permissions": ["identity", "sidePanel", "storage", "unlimitedStorage"],
+  "host_permissions": [
+    "https://www.googleapis.com/*",
+    "https://huggingface.co/*",
+    "https://*.huggingface.co/*",
+    "https://*.hf.co/*"
+  ],
+  "oauth2": {
+    "client_id": "795276030165-66df6h3n4epfse6ng98mqtu7ia9sb9ba.apps.googleusercontent.com",
+    "scopes": ["https://www.googleapis.com/auth/drive.readonly"]
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": { "default": "Ctrl+Shift+K", "mac": "Command+Shift+K" },
+      "description": "Open the search panel"
+    }
+  },
+  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+}

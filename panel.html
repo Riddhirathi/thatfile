@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>What Was That File</title>
+<link rel="stylesheet" href="panel.css">
+<script src="lib/xlsx.full.min.js"></script>
+<script src="lib/mammoth.browser.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="brand">What was that file?</div>
+    <input id="q" type="search" placeholder="Describe what was in it…" autocomplete="off" autofocus>
+    <div class="row">
+      <div class="seg" role="group" aria-label="Search type">
+        <button data-mode="meaning" aria-pressed="true">Meaning</button>
+        <button data-mode="keywords" aria-pressed="false">Exact words</button>
+      </div>
+      <span id="timing" class="timing"></span>
+    </div>
+  </header>
+
+  <section id="setup" hidden>
+    <h2>One-time setup</h2>
+    <p>The extension needs your permission to read your Drive files. Google asks every app to register first. It is free and takes about 5 minutes.</p>
+    <ol>
+      <li>Open <a href="https://console.cloud.google.com/projectcreate" target="_blank">Google Cloud Console</a> and create a project.</li>
+      <li>Search for <b>Google Drive API</b> and click <b>Enable</b>.</li>
+      <li>Go to <b>Google Auth Platform</b>. Set up the consent screen as <b>External</b>, and add your own email under <b>Audience → Test users</b>.</li>
+      <li>Under <b>Clients</b>, create a client of type <b>Chrome Extension</b>. For Item ID, paste:<br><code id="extid" class="copy" title="Click to copy"></code></li>
+      <li>Copy the Client ID it gives you into <code>manifest.json</code> where it says <code>PASTE_YOUR_CLIENT_ID</code>.</li>
+      <li>Go to <code>chrome://extensions</code> and click the reload icon on this extension.</li>
+    </ol>
+  </section>
+
+  <section id="signin" hidden>
+    <h2>Connect your Drive</h2>
+    <p>Your files are read straight from Google into this browser. The AI model runs here too. Nothing is sent anywhere else.</p>
+    <button id="signinBtn" class="primary">Connect Google Drive</button>
+    <p id="signinErr" class="err"></p>
+  </section>
+
+  <main id="results"></main>
+
+  <footer>
+    <div id="status"></div>
+    <div class="foot-actions">
+      <button id="syncBtn" class="link" hidden>Sync now</button>
+      <button id="resetBtn" class="link" hidden>Clear index</button>
+    </div>
+  </footer>
+<script type="module" src="panel.js"></script>
+</body>
+</html>
